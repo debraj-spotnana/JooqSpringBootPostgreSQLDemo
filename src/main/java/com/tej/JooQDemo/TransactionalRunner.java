@@ -7,7 +7,6 @@ import org.springframework.transaction.PlatformTransactionManager;
 import org.springframework.transaction.TransactionDefinition;
 import org.springframework.transaction.support.TransactionTemplate;
 
-/** Provides support for DB transactions. All transactions run at serializable isolation level. */
 @Service
 @AllArgsConstructor
 public class TransactionalRunner {

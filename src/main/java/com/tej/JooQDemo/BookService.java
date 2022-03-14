@@ -23,11 +23,11 @@ public class BookService {
 
     public List<Book> getBooks(){
         final List<Book> books = new ArrayList<>();
-        ResultQuery<BookRecord> resQuery = context.selectFrom(Tables.BOOK).fetchSize(2);
+        ResultQuery<BookRecord> resQuery = context.selectFrom(Tables.BOOK);
         transactionRunner.readOnlyTransaction(() -> {
-            try(final Cursor<BookRecord> bookRecords = resQuery.fetchLazy()) {
+            try(final Cursor<BookRecord> bookRecords = resQuery.fetchSize(2).fetchLazy()) {
                 while (bookRecords.hasNext()) {
-                    List<Book> into = bookRecords.fetch().into(Book.class);
+                    List<Book> into = bookRecords.fetchNext(2).into(Book.class);
                     System.out.println("Num Records: " + into.size());
                     books.addAll(into);
                 }

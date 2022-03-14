@@ -33,14 +33,18 @@ public class BookService {
                 }
             }
         });
+//        for (int i=10; i<100; i++) {
+//            final Book b = new Book(i, "title" + i, "author" + i);
+//            insertBook(b);
+//        }
         return books;
     }
 
     public void insertBook(Book book){
         System.out.println(book.getTitle());
         context
-            .insertInto(Tables.BOOK, Tables.BOOK.TITLE, Tables.BOOK.AUTHOR)
-            .values(book.getTitle(), book.getAuthor())
+            .insertInto(Tables.BOOK, Tables.BOOK.ID, Tables.BOOK.TITLE, Tables.BOOK.AUTHOR)
+            .values(book.getId(), book.getTitle(), book.getAuthor())
             .execute();
     }
 }
